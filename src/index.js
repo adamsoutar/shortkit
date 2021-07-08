@@ -1,5 +1,4 @@
-import React from 'react'
+import { ShortkitContext, ShortkitProvider } from './shortkit-context'
+import useShortcut from './use-shortcut'
 
-export const ExampleComponent = ({ text }) => {
-  return <div>test</div>
-}
+export { ShortkitContext, ShortkitProvider, useShortcut }
