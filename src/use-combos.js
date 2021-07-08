@@ -9,6 +9,13 @@ function eventIsFromAnInput (e) {
   )
 }
 
+// This is done awkwardly to avoid a miscompilation bug in babel
+function itertorValues (iterator) {
+  const out = []
+  for (const val of iterator) out.push(val)
+  return out
+}
+
 export default function useCombos () {
   const cuts = useRef({})
   const nextID = useRef(0)
@@ -50,7 +57,7 @@ export default function useCombos () {
 
     const prior = cuts.current[combo][keys[0]]
     // "shortcut" is the { callback, triggerInInputs } object
-    const shortcut = [...prior][prior.size - 1][1]
+    const shortcut = itertorValues(prior)[prior.size - 1][1]
 
     if (!shortcut.triggerInInputs && eventIsFromAnInput(e)) return
 
