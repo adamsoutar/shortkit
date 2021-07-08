@@ -2,11 +2,18 @@
 // Used to keep a colleciton of key combos and resolve which one we should call
 import { useRef } from 'react'
 
+function eventIsFromAnInput (e) {
+  return (
+    ['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName) ||
+    e.target.isContentEditable
+  )
+}
+
 export default function useCombos () {
   const cuts = useRef({})
   const nextID = useRef(0)
 
-  function addShortcut (combo, callback, priority) {
+  function addShortcut (combo, callback, priority, triggerInInputs) {
     const id = nextID.current++
 
     if (!cuts.current[combo]) {
@@ -16,7 +23,7 @@ export default function useCombos () {
       cuts.current[combo][priority] = new Map()
     }
 
-    cuts.current[combo][priority].set(id, callback)
+    cuts.current[combo][priority].set(id, { callback, triggerInInputs })
 
     return id
   }
@@ -30,7 +37,7 @@ export default function useCombos () {
     }
   }
 
-  function resolveAndFireCallback (combo) {
+  function resolveAndFireCallback (combo, e) {
     if (!cuts.current[combo]) return
 
     const keys = Object
@@ -42,8 +49,12 @@ export default function useCombos () {
     keys.sort((a, b) => b - a)
 
     const prior = cuts.current[combo][keys[0]]
-    const cB = [...prior][prior.size - 1][1]
-    cB()
+    // "shortcut" is the { callback, triggerInInputs } object
+    const shortcut = [...prior][prior.size - 1][1]
+
+    if (!shortcut.triggerInInputs && eventIsFromAnInput(e)) return
+
+    shortcut.callback()
   }
 
   return { addShortcut, removeShortcut, resolveAndFireCallback }

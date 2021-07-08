@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { useShortcut } from 'shortkit'
 
-const ShortcutUser = ({ combo, priority }) => {
+const ShortcutUser = ({ combo, priority, triggerInInputs }) => {
   const [n, setN] = useState(0)
 
   useShortcut(
     combo,
     () => setN(prev => prev + 1),
     {
-      priority
+      priority,
+      triggerInInputs
     }
   )
 

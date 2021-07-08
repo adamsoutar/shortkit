@@ -12,11 +12,12 @@ const ShortkitProvider = ({ children }) => {
   const handlers = useRef({})
 
   const registerShortcut = (combo, callback, priority, triggerInInputs) => {
-    const id = combos.addShortcut(combo, callback, priority)
+    const id = combos.addShortcut(combo, callback, priority, triggerInInputs)
 
     if (!handlers[combo]) {
-      mousetrap.bindGlobal(combo, () => {
-        combos.resolveAndFireCallback(combo)
+      mousetrap.bindGlobal(combo, e => {
+        // e is used to figure out if it came from an input
+        combos.resolveAndFireCallback(combo, e)
       })
     }
 
