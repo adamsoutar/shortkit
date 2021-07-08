@@ -11,6 +11,14 @@
   "engines": {
     "node": ">=10"
   },
+  "keywords": [
+    "keyboard",
+    "mousetrap",
+    "shortcuts",
+    "hotkey",
+    "react",
+    "hooks"
+  ],
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
