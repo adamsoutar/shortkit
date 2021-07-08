@@ -7,18 +7,16 @@ export default function useShortcut (combo, callback, options) {
   const priority = options?.priority ?? 0
   const triggerInInputs = options?.triggerInInputs ?? true
 
-  const cB = useCallback(callback, [])
-
   useEffect(() => {
     const id = registerShortcut(
       combo,
-      cB,
+      callback,
       priority,
       triggerInInputs
     )
 
     return () => unregisterShortcut(combo, priority, id)
-  }, [combo, cB, options])
+  }, [combo, callback, options])
 
   if (!amWrapped) {
     throw new Error(`useShortcut called without a provider!
