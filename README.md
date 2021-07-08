@@ -19,10 +19,6 @@ import React from 'react'
 import { useShortcut, ShortkitProvider } from 'shortkit'
 
 const MyComponent = () => {
-  useShortcut('mod+s', () => {
-    // Save the document
-  })
-
   useShortcut('c', () => {
     // Create a new document
   }, { fireInInputs: false })
