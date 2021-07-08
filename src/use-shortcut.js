@@ -7,7 +7,7 @@ export default function useShortcut (combo, callback, options) {
   const priority = options?.priority ?? 0
   const triggerInInputs = options?.triggerInInputs ?? true
 
-  const cB = useCallback(callback, [combo])
+  const cB = useCallback(callback, [])
 
   useEffect(() => {
     const id = registerShortcut(
