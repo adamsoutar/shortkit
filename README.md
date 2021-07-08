@@ -1,30 +1,43 @@
-# shortkit
+<p align="center">
+  <img src="assets/logo.svg" />
+</p>
 
-> The React toolkit for keyboard shortcuts ⚡️
+---
 
 [![NPM](https://img.shields.io/npm/v/shortkit.svg)](https://www.npmjs.com/package/shortkit) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save shortkit
+npm i shortkit
 ```
 
 ## Usage
 
-```jsx
-import React, { Component } from 'react'
+```js
+import React from 'react'
+import { useShortcut, ShortkitProvider } from 'shortkit'
 
-import MyComponent from 'shortkit'
-import 'shortkit/dist/index.css'
+const MyComponent = () => {
+  useShortcut('mod+s', () => {
+    // Save the document
+  })
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+  useShortcut('c', () => {
+    // Create a new document
+  }, { fireInInputs: false })
+
+  return someGubbins
+}
+
+const App = () => {
+  return (
+    <ShortkitProvider>
+      <MyComponent />
+    </ShortkitProvider>
+  )
 }
 ```
 
-## License
-
-MIT © [adamsoutar](https://github.com/adamsoutar)
+For more advanced usage, and to learn why Shortkit offers so much more
+awesomeness than similar libraries, view the [documentation](./assets/api-reference) 😃
