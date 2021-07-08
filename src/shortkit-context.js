@@ -4,7 +4,9 @@ import useCombos from './use-combos'
 
 const ShortkitContext = React.createContext({
   registerShortcut: (combo, callback, options) => {},
-  unregisterShortcut: (id) => {}
+  unregisterShortcut: (id) => {},
+  // We use this to detect if you've used <ShortkitProvider /> correctly
+  amWrapped: false
 })
 
 const ShortkitProvider = ({ children }) => {
@@ -30,7 +32,9 @@ const ShortkitProvider = ({ children }) => {
   return (
     <ShortkitContext.Provider
       value={{
-        registerShortcut, unregisterShortcut
+        registerShortcut,
+        unregisterShortcut,
+        amWrapped: true
       }}
     >
       {children}
