@@ -36,4 +36,14 @@ const App = () => {
 ```
 
 For more advanced usage, and to learn why Shortkit offers so much more
-awesomeness than similar libraries, view the [documentation](./assets/api-reference) 😃
+awesomeness than similar libraries, check out the [docs](./assets/api-reference.md).
+
+---
+
+<h6 align="center">
+by Adam Soutar
+</h6>
+
+<p align="center">
+  ⌨️ + ⚡️ = 😍
+</p>
