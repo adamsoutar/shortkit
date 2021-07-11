@@ -9,7 +9,7 @@ const App = () => {
       <UnmountableShortcutUser combo='mod+s' unmountCombo='t' />
       <UnmountableShortcutUser combo='c' unmountCombo='y' priority={1} />
       <UnmountableShortcutUser combo='c' unmountCombo='u' priority={2} triggerInInputs={false} />
-      <UnmountableShortcutUser combo='c' unmountCombo='i' />
+      <UnmountableShortcutUser combo='c' unmountCombo='i' propagate />
 
       <input placeholder='Test global shortcuts in here...' />
     </ShortkitProvider>

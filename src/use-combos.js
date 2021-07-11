@@ -20,7 +20,7 @@ export default function useCombos () {
   const cuts = useRef({})
   const nextID = useRef(0)
 
-  function addShortcut (combo, callback, priority, triggerInInputs) {
+  function addShortcut (combo, callback, priority, triggerInInputs, propagate) {
     const id = nextID.current++
 
     if (!cuts.current[combo]) {
@@ -30,7 +30,7 @@ export default function useCombos () {
       cuts.current[combo][priority] = new Map()
     }
 
-    cuts.current[combo][priority].set(id, { callback, triggerInInputs })
+    cuts.current[combo][priority].set(id, { callback, triggerInInputs, propagate })
 
     return id
   }
@@ -56,12 +56,14 @@ export default function useCombos () {
     keys.sort((a, b) => b - a)
 
     const prior = cuts.current[combo][keys[0]]
-    // "shortcut" is the { callback, triggerInInputs } object
+    // "shortcut" is the { callback, triggerInInputs, propagate } object
     const shortcut = itertorValues(prior)[prior.size - 1][1]
 
     if (!shortcut.triggerInInputs && eventIsFromAnInput(e)) return
 
     shortcut.callback()
+
+    return shortcut.propagate
   }
 
   return { addShortcut, removeShortcut, resolveAndFireCallback }

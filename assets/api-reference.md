@@ -37,7 +37,8 @@ useShortcut(
   () => alert('Come and sing along with me :)'),
   {
     priority: 2, // Defaults to 0
-    fireInInputs: false // Defaults to true
+    fireInInputs: false, // Defaults to true
+    propagate: true // Defaults to false
   }
 )
 ```
@@ -55,6 +56,11 @@ Some shortcuts, like `c` for create, shouldn't fire while the user is typing
 
 _Some_ shortcuts, like `mod+s` for save, should.
 
+**propagate** controls whether to send the keyboard events on after dealing with
+them.
+
+For example if you capture `mod+s` for some action, should it _also_ trigger
+higher up actions like the browser's default "Save Page" function?
 
 ## Key reference
 

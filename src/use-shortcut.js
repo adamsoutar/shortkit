@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback } from 'react'
+import { useContext, useEffect } from 'react'
 import { ShortkitContext } from './shortkit-context'
 
 export default function useShortcut (combo, callback, options) {
@@ -6,13 +6,15 @@ export default function useShortcut (combo, callback, options) {
 
   const priority = options?.priority ?? 0
   const triggerInInputs = options?.triggerInInputs ?? true
+  const propagate = options?.propagate ?? false
 
   useEffect(() => {
     const id = registerShortcut(
       combo,
       callback,
       priority,
-      triggerInInputs
+      triggerInInputs,
+      propagate
     )
 
     return () => unregisterShortcut(combo, priority, id)
