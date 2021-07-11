@@ -21,7 +21,7 @@ import { useShortcut, ShortkitProvider } from 'shortkit'
 const MyComponent = () => {
   useShortcut('c', () => {
     // Create a new document
-  }, { fireInInputs: false })
+  }, { triggerInInputs: false })
 
   return someGubbins
 }
